@@ -1,12 +1,12 @@
 const express = require('express');
-const app = expre();
+const app = express();
 const path = require('path');
 
-app.use(express.static(_dirname ='/dist'));
+app.use(express.static(_dirname ='/dist/<name-of-app>'));
 
 app.listen(process.env.PORT||8080);
 
 app.get('/*',function*(req,res){
-    res.sendFile(path.join(_dirname +'/dist/index.html'));
+    res.sendFile(path.join(_dirname +'/dist/<name-of-app>/index.html'));
 })
-console.log('Console listening');
+app.listen(process.env.PORT||8080)
