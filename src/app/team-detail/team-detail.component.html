@@ -1,0 +1,64 @@
+<table *ngFor = "let team of t?.teams|getteamId:teamid">
+<tr>
+<th ><img src="{{team.crestUrl}}"width="350" height="350"></th>
+</tr>
+<div *ngFor = "let s of stand?.standings[0].table">
+<div *ngIf = "team.id===s.team.id">
+<tr>
+     <th colspan="3;text-align:center;">{{s.team.name}}</th>
+
+</tr>
+<tr>
+  <th>Position : {{s.position}}</th>
+</tr>
+<tr>
+  <th>Won : {{s.won}}</th>
+</tr>
+<tr>
+  <th>Draw : {{s.draw}}</th>
+</tr>
+<tr>
+  <th>Lost : {{s.lost}}</th>
+</tr>
+<tr>
+  <th>Points : {{s.points}}</th>
+</tr>
+<tr>
+  <th>Goals For : {{s.goalsFor}}</th>
+</tr>
+<tr>
+  <th>Goals Against : {{s.goalsAgainst}}</th>
+</tr>
+<tr>
+  <th>Goal Difference : {{s.goalDifference}}</th>
+</tr>
+</div>
+</div>
+</table>
+<br>
+<br>
+
+<div class="container" *ngFor = "let team of t?.teams|getteamId:teamid">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th colspan="5;text-align:center;"> Games played</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let table of m?.matches|paginate:{itemsPerPage:50,currentPage: p, id:'CR'}"routerLink="/matchdetail/{{table.id}}">
+      <tr *ngIf = "team.id===table.homeTeam.id||team.id===table.awayTeam.id">
+        <div *ngFor = "let team of t?.teams"><div *ngIf = "table.homeTeam.id===team.id">
+          <img src="{{team.crestUrl}}"width="70" height="70"></div></div>
+        <td>{{table.homeTeam.name}}</td>
+        <td>{{table.score.fullTime.homeTeam}}:{{table.score.fullTime.awayTeam}}</td>
+        <td>{{table.awayTeam.name}}</td>
+        <div *ngFor = "let team of t?.teams"><div *ngIf = "table.awayTeam.id===team.id">
+          <img src="{{team.crestUrl}}"width="70" height="70"></div></div>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="p = $event" id="CR"></pagination-controls>
+</div>
+
+<app-steam-detail></app-steam-detail>
+<button type="button" class="btn btn-primary btn-block" (click)="goBack()">BACK</button>

@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>TOP 10 SCORERS</h1>
+  <table class="table table-hover">
+      <thead>
+          <tr>
+              <th>Team</th>
+              <th>Player</th>
+              <th>Goals</th>
+          </tr>
+      </thead>
+
+      <tbody>
+          <tr *ngFor="let play of p?.scorers"routerLink="/team-detail/{{play.team.id}}">
+            <td>
+            <div *ngFor = "let team of t?.teams"><div *ngIf = "play.team.id === team.id">
+              <img src="{{team.crestUrl}}"width="50" height="50"></div></div></td>
+                        <td> {{play.player.name}}</td>
+              <td>
+                {{play.numberOfGoals}}
+              </td>
+          </tr>
+      </tbody>
+  </table>
+  </div>

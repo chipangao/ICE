@@ -1,0 +1,21 @@
+<div class="container" *ngFor = "let team of t?.teams|getteamId:teamid">
+  <table class="table">
+    <thead>
+      <tr>
+        <th colspan="5;text-align:center;">Scheduled Games Play</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let table of SCHEDULEDm?.matches|paginate:{itemsPerPage:50,currentPage: p, id:'SR'}">
+      <tr *ngIf = "team.id===table.homeTeam.id||team.id===table.awayTeam.id">
+        <div *ngFor = "let team of t?.teams"><div *ngIf = "table.homeTeam.id===team.id">
+          <img src="{{team.crestUrl}}"width="70" height="70"></div></div>
+        <td>{{table.homeTeam.name}}</td>
+        <td>{{table.utcDate|date}}</td>
+        <td>{{table.awayTeam.name}}</td>
+        <div *ngFor = "let team of t?.teams"><div *ngIf = "table.awayTeam.id===team.id">
+          <img src="{{team.crestUrl}}"width="70" height="70"></div></div>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="p = $event" id="SR"></pagination-controls>
+</div>
